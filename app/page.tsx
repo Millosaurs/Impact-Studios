@@ -193,9 +193,6 @@ export default function LandingPage() {
               <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="#services">
                 Services
               </Link>
-              <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="#how-it-works">
-                How It Works
-              </Link>
               <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="#testimonials">
                 Testimonials
               </Link>
@@ -205,6 +202,9 @@ export default function LandingPage() {
               <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="/pages/recruit">
                 Recruit
               </Link>
+              <Button asChild size="sm" className="glow-effect hover:glow-effect-hover">
+                <Link href="/pages/auth">Start <ArrowRight size={20} /></Link>
+              </Button>
               <ThemeToggle />
             </nav>
           </div>
@@ -227,7 +227,9 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0">
-                  <Button size="lg" className="glow-effect hover:glow-effect-hover">Start Your Project</Button>
+                  <Button asChild size="lg" className="glow-effect hover:glow-effect-hover">
+                    <Link href="/pages/auth">Start Your Project</Link>
+                  </Button>
                   <Button size="lg" variant="outline" className="glow-effect-outline hover:glow-effect-outline-hover">
                     <Link href="#services">Explore Services</Link>
                   </Button>
