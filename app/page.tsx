@@ -159,6 +159,7 @@ function LoadingScreen() {
 export default function LandingPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [visibleServices, setVisibleServices] = useState(3)
+  const [isNavOpen, setIsNavOpen] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -189,12 +190,15 @@ export default function LandingPage() {
               <Zap className="h-8 w-8 mr-3 text-black dark:text-white" />
               <span className="font-bold text-xl">Impact Studios</span>
             </Link>
-            <nav className="flex gap-6 items-center">
+            <button
+              className="sm:hidden text-black dark:text-white"
+              onClick={() => setIsNavOpen(!isNavOpen)}
+            >
+              ☰
+            </button>
+            <nav className={`absolute sm:relative top-16 sm:top-0 left-0 sm:left-auto w-full sm:w-auto bg-white dark:bg-black sm:bg-transparent sm:dark:bg-transparent p-4 sm:p-0 ${isNavOpen ? 'flex' : 'hidden'} sm:flex flex-col sm:flex-row items-center sm:items-center justify-center sm:justify-start gap-4 sm:gap-6`}>
               <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="#services">
                 Services
-              </Link>
-              <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="#testimonials">
-                Testimonials
               </Link>
               <Link className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="/pages/application">
                 Application
@@ -214,19 +218,19 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full py-24 md:py-32 lg:py-40 xl:py-48"
+            className="w-full py-20 md:py-28 lg:py-36 xl:py-44"
           >
             <div className="container px-4 md:px-6 mx-auto">
-              <div className="flex flex-col items-center space-y-8 text-center">
-                <div className="space-y-4">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl glow-text">
+              <div className="flex flex-col items-center space-y-6 text-center">
+                <div className="space-y-3">
+                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl glow-text text-shadow-black">
                     Create Impact with Innovative Solutions
                   </h1>
                   <p className="mx-auto max-w-[800px] text-gray-600 dark:text-gray-300 text-xl md:text-2xl">
                     Partner with Impact Studios to bring your vision to life. From web development to marketing, we're here to make a difference.
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0">
+                <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
                   <Button asChild size="lg" className="glow-effect hover:glow-effect-hover">
                     <Link href="/pages/auth">Start Your Project</Link>
                   </Button>
@@ -242,17 +246,17 @@ export default function LandingPage() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             id="services" 
-            className="w-full py-24 md:py-32 lg:py-40 bg-gray-100 dark:bg-black"
+            className="w-full py-20 md:py-28 lg:py-36 bg-gray-100 dark:bg-black"
           >
             <div className="container px-4 md:px-6 mx-auto">
-              <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-16 glow-text">Our Services</h2>
-              <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+              <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-12 glow-text text-shadow-black">Our Services</h2>
+              <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
                 {services.slice(0, visibleServices).map((service, index) => (
                   <ServiceCard key={index} {...service} />
                 ))}
               </div>
               {visibleServices < services.length && (
-                <div className="mt-12 text-center">
+                <div className="mt-10 text-center">
                   <Button onClick={showMoreServices} className="glow-effect hover:glow-effect-hover">
                     Show More Services
                   </Button>
@@ -265,11 +269,11 @@ export default function LandingPage() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             id="how-it-works" 
-            className="w-full py-24 md:py-32 lg:py-40"
+            className="w-full py-20 md:py-28 lg:py-36"
           >
             <div className="container px-4 md:px-6 mx-auto">
-              <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-16 glow-text">How We Create Impact</h2>
-              <div className="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-8">
+              <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-12 glow-text text-shadow-black">How We Create Impact</h2>
+              <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-6">
                 {steps.map((step, index) => (
                   <div key={index} className="flex flex-col items-center w-full md:w-1/3">
                     <StepCard {...step} />
@@ -283,11 +287,11 @@ export default function LandingPage() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             id="testimonials" 
-            className="w-full py-24 md:py-32 lg:py-40 bg-gray-100 dark:bg-black"
+            className="w-full py-20 md:py-28 lg:py-36 bg-gray-100 dark:bg-black"
           >
             <div className="container px-4 md:px-6 mx-auto">
-              <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-16 glow-text">Impact We've Made</h2>
-              <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+              <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-12 glow-text text-shadow-black">Impact We've Made</h2>
+              <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
                 {testimonials.map((testimonial, index) => (
                   <TestimonialCard key={index} {...testimonial} />
                 ))}
@@ -298,19 +302,19 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-full py-24 md:py-32 lg:py-40"
+            className="w-full py-20 md:py-28 lg:py-36"
           >
             <div className="container px-4 md:px-6 mx-auto">
-              <div className="flex flex-col items-center space-y-8 text-center">
-                <div className="space-y-4">
-                  <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl glow-text">
+              <div className="flex flex-col items-center space-y-6 text-center">
+                <div className="space-y-3">
+                  <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl glow-text text-shadow-black">
                     Ready to Make an Impact?
                   </h2>
                   <p className="mx-auto max-w-[700px] text-gray-600 dark:text-gray-300 text-xl md:text-2xl">
                     Join Impact Studios today and let's create something extraordinary together.
                   </p>
                 </div>
-                <div className="w-full max-w-md space-y-4">
+                <div className="w-full max-w-md space-y-3">
                   <Button asChild size="lg" className="glow-effect hover:glow-effect-hover">
                     <Link href="https://discord.com/invite/your-invite-link">
                       Join Our Discord
@@ -325,10 +329,10 @@ export default function LandingPage() {
             </div>
           </motion.section>
         </main>
-        <footer className="py-8 w-full shrink-0 border-t border-gray-200 dark:border-white/20">
+        <footer className="py-6 w-full shrink-0 border-t border-gray-200 dark:border-white/20">
           <div className="container px-4 md:px-6 mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-0">© 2024 Impact Studios. All rights reserved.</p>
-            <nav className="flex gap-6">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-0">© 2024 Impact Studios. All rights reserved.</p>
+            <nav className="flex gap-4">
               <Link className="text-sm hover:text-gray-600 dark:hover:text-gray-300 transition-colors" href="#">
                 Terms of Service
               </Link>
@@ -345,13 +349,13 @@ export default function LandingPage() {
 
 function ServiceCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <Card className="bg-white dark:bg-black border border-gray-200 dark:border-white/20 p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-center mb-6">{icon}</div>
-        <CardTitle className="text-2xl text-center glow-text">{title}</CardTitle>
+    <Card className="bg-white dark:bg-black border border-gray-200 dark:border-white/20 p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-center mb-4">{icon}</div>
+        <CardTitle className="text-xl text-center glow-text text-shadow-black">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-center text-gray-600 dark:text-gray-300 text-lg">{description}</CardDescription>
+        <CardDescription className="text-center text-gray-600 dark:text-gray-300 text-base">{description}</CardDescription>
       </CardContent>
     </Card>
   )
@@ -359,17 +363,17 @@ function ServiceCard({ icon, title, description }: { icon: React.ReactNode; titl
 
 function StepCard({ number, title, description }: { number: number; title: string; description: string }) {
   return (
-    <Card className="bg-white dark:bg-black border border-gray-200 dark:border-white/20 p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-between mb-6">
-          <div className="w-16 h-16 rounded-full bg-black dark:bg-white text-white dark:text-black text-3xl font-bold flex items-center justify-center glow-effect">
+    <Card className="bg-white dark:bg-black border border-gray-200 dark:border-white/20 p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between mb-4">
+          <div className="w-14 h-14 rounded-full bg-black dark:bg-white text-white dark:text-black text-2xl font-bold flex items-center justify-center glow-effect">
             {number}
           </div>
-          <CardTitle className="text-2xl text-center glow-text flex-1">{title}</CardTitle>
+          <CardTitle className="text-xl text-center glow-text text-shadow-black flex-1">{title}</CardTitle>
         </div>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-center text-gray-600 dark:text-gray-300 text-lg">{description}</CardDescription>
+        <CardDescription className="text-center text-gray-600 dark:text-gray-300 text-base">{description}</CardDescription>
       </CardContent>
     </Card>
   )
@@ -377,15 +381,15 @@ function StepCard({ number, title, description }: { number: number; title: strin
 
 function TestimonialCard({ quote, author }: { quote: string; author: string }) {
   return (
-    <Card className="bg-white dark:bg-black border border-gray-200 dark:border-white/20 p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
-      <CardHeader className="pb-4">
-        <div className="flex items-center justify-center mb-6">
-          <CheckCircle className="h-12 w-12 text-green-500" />
+    <Card className="bg-white dark:bg-black border border-gray-200 dark:border-white/20 p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-center mb-4">
+          <CheckCircle className="h-10 w-10 text-green-500" />
         </div>
       </CardHeader>
       <CardContent>
-        <blockquote className="text-center italic mb-6 text-gray-600 dark:text-gray-300 text-lg">"{quote}"</blockquote>
-        <p className="text-center font-semibold text-lg glow-text">- {author}</p>
+        <blockquote className="text-center italic mb-4 text-gray-600 dark:text-gray-300 text-base">"{quote}"</blockquote>
+        <p className="text-center font-semibold text-base glow-text text-shadow-black">- {author}</p>
       </CardContent>
     </Card>
   )
